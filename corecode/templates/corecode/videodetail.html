@@ -1,0 +1,79 @@
+{% extends 'corecode/base.html' %}
+
+{% block content %}
+<div class="row">
+ {% for videos in videodetail %}
+
+
+          <div class="col-md-8">
+
+            <div class="card">
+            	          	<iframe height="400" src="{{ videos.video_link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+              <div class="card-header">
+              	
+                <h5 class="ml-4 card-title">{{ videos.name}}</h5>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus">show more</i>
+                  </button>
+                  
+                  
+                </div>
+              </div>
+              
+              <textarea id="editor1" name="editor1" data-sample-preservewhitespace>
+							{{ videos.discription|safe }}
+			</textarea>
+				
+            </div>
+            <!-- /.card -->
+          </div>
+       {% endfor %}
+
+       <div class="col-md-4">
+       	 {% for videoalls in videoall %}
+
+       	<div class="">
+           
+            <a href="{% url 'watch' videoalls.video_id %}">
+            <div class="info-box">
+              <iframe width="235" height="135" src="{{ videoalls.video_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <div class="info-box-content">
+              	<h6>{{ videoalls.choice_class}}</h4>
+                <span class="info-box-number">
+                  <small>{{ videoalls.choice_subject}}</small>
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            </a>
+          </div>
+             {% endfor %}
+       </div>
+      
+
+        </div>
+				
+  {% endblock content %}
+
+
+  {% block morejs %}
+   <script>
+    var config = {
+      extraPlugins: 'codesnippet',
+      codeSnippet_theme: 'monokai_sublime',
+      contentsCss: ['http://cdn.ckeditor.com/4.15.1/full-all/contents.css',
+        'https://ckeditor.com/docs/ckeditor4/4.15.1/examples/assets/css/classic.css'
+      ]
+    };
+
+     CKEDITOR.replace('editor1', config,{
+      height: 260,
+      /* Default CKEditor 4 styles are included as well to avoid copying default styles. */
+      
+    });
+  </script>
+  {% endblock morejs %}
+    

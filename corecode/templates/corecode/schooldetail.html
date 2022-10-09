@@ -1,0 +1,83 @@
+{% extends 'corecode/base.html' %}
+
+
+{% block content %}
+
+
+<div class="column">
+ {% for schools in school %}
+<div class="card-image" style="background-image: url({{schools.bg_image.url}})">
+        <img src="{{schools.logo.url}}" alt="..." class="rounded-circle"  width="140" height="140">
+      <a href="{{ schools.slug }}" >
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">{{schools.name}}</div>
+          <div class="card-body">
+            <h5 class="card-title">{{schools.slug}}</h5>
+            <p class="card-text">{{schools.discription}}.</p>
+          </div>
+        </div></a>
+      </div>
+
+      <nav class="row navbar navbar-light bg-light justify-content-between" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'school' %}">school</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ schools.name}}</li>
+        </ol>
+        
+        {% endfor %}
+ 
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+</div>
+  
+    
+    <!-- Grid row -->
+<div class="row">
+
+   {% for videos in video %}
+  <div class="col-lg-4 col-md-12 mb-4">
+
+    <div class="embed-responsive embed-responsive-21by9">
+  <iframe width="727" height="409" src="{{videos.video_link}}" frameborder="0" allow="accelerometer; fullsize, autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<a href="{% url 'watch' videos.video_id %}"><h4 class="card-header">{{videos.name|slice:"0:30"}}</h4> </a>
+    <div class="mt-4 d-flex justify-content-between living-coral-text">
+        <h6 class="ml-4 card-subtitle font-weight-light">{{videos.choice_class}}</h6>
+        <h6 class="mr-4 font-small font-weight-light mt-n1">{{videos.choice_subject}}</h6>
+
+      </div>
+<div class="card-body">
+        <!--Title-->
+        
+      </div>  
+  </div>
+  {% empty %}
+    		<li>Add Video Here <a href="{% url 'upload' %}">Add</a>.</li>
+ {% endfor %}
+  <!-- Grid column -->
+  
+<!-- Grid row -->
+  {% endblock content %}
+
+  {% block morejs %}
+<script type="text/javascript">
+  $('#modal1').on('hidden.bs.modal', function (e) {
+  // do something...
+  $('#modal1 iframe').attr("src", $("#modal1 iframe").attr("src"));
+});
+
+$('#modal6').on('hidden.bs.modal', function (e) {
+  // do something...
+  $('#modal6 iframe').attr("src", $("#modal6 iframe").attr("src"));
+});
+
+$('#modal4').on('hidden.bs.modal', function (e) {
+  // do something...
+  $('#modal4 iframe').attr("src", $("#modal4 iframe").attr("src"));
+});
+</script>
+  {% endblock morejs %}

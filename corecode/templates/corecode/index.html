@@ -1,0 +1,98 @@
+{% extends 'corecode/base.html' %}
+
+{% block content %}
+  <section class="content">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-3">
+            <a href="{% url 'course' %}">
+            <div class="info-box">
+              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-book"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Courses</span>
+                <span class="info-box-number">
+                  {{crcount}}
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            </a>
+          </div>
+          <!-- /.col -->
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <a href="{% url 'school' %}">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-school"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">School Courses</span>
+                <span class="info-box-number">{{scount}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            </a>
+          </div>
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+
+          <div class="col-12 col-sm-6 col-md-3">
+            <a href="{% url 'collage' %}">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-university"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Collage Course</span>
+                <span class="info-box-number">{{ccount}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            </a>
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-3">
+            <a href="{% url 'tution' %}">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-graduation-cap"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Coaching Courses</span>
+                <span class="info-box-number">{{tcount}}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            </a>
+          </div>
+          <!-- /.col -->
+
+	
+
+        <div class="row">
+
+          {% for videos in video %}
+         <div class="col-lg-4 col-md-12 mb-4">
+       
+           <div class="embed-responsive embed-responsive-21by9" >
+         <iframe width="727" height="409" src="{{videos.video_link}}" frameborder="0" allow="accelerometer; fullsize, clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       </div>
+       <a href="{% url 'watch' videos.video_id %}"><h4 class="card-header">{{videos.name|slice:"0:20"}}</h4> </a>
+           <div class="mt-4 d-flex justify-content-between living-coral-text">
+               <h6 class="ml-4 card-subtitle font-weight-light">{{videos.choice_class}}</h6>
+               <h6 class="mr-4 font-small font-weight-light mt-n1">{{videos.choice_subject}}</h6>
+                
+             </div>
+       <div class="card-body">
+               <!--Title-->
+               
+             </div>  
+         </div>
+         {% empty %}
+    		<li>Add Video Here <a href="{% url 'upload' %}">Add</a>.</li>
+        {% endfor %}
+      </div><!--/. container-fluid -->
+    </section>
+{% endblock content %}

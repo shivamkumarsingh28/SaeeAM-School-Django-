@@ -1,0 +1,25 @@
+{% extends 'corecode/base.html' %}
+
+
+{% block content %}
+  <div class="row">
+    {% for schools in course %}
+    <div class="col-sm-6">
+
+      <div class="card-image" style="background-image: url({{schools.bg_image.url}})">
+        <img src="{{schools.logo.url}}" alt="..." class="rounded-circle"  width="140" height="140">
+      <a href="{{ schools.pk }}" >
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">{{schools.name}}</div>
+          <div class="card-body">
+            <h5 class="card-title">{{schools.slug}}</h5>
+            <p class="card-text">{{schools.discription|slice:255}}.</p>
+          </div>
+        </div></a>
+      </div>
+    </div>
+      {% empty %}
+    		<li>Add courses Here <a href="{% url 'create' %}">Add</a>.</li>
+      {% endfor %}
+    </div>
+  {% endblock content %}
